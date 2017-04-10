@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ajouter personne</title>
+    <link rel="icon" href="/favicon.jpg">
+</head>
+<body>
+    <div>
+        <h2>Personne</h2>
+        <table>
+            <tr>
+                <td>Nom</td>
+                <td><input type="text" id="FirstName" /></td>
+            </tr>
+            <tr>
+                <td>Prénom</td>
+                <td><input type="text" id="LastName" /></td>
+            </tr>
+            <tr>
+                <td>Nom</td>
+                <td><input type="text" id="Birthday" placeholder="dd/mm/yyyy" /></td>
+            </tr>
+        </table>
+        <button id="saveButton">Save</button>
+    </div>
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+
+    <script>
+        var uri = '/api/personne';
+
+        $("#saveButton").click(function () {
+            var person = {
+                FirstName: document.getElementById('FirstName').value,
+                LastName: document.getElementById('LastName').value,
+                Birthday: stringToDate(document.getElementById('Birthday').value).toJSON()
+            };
+
+            $.ajax({
+                type: "POST",
+                url: '/api/personne',
+                data: person,
+                success: function (result) {
+                    var id = result.Id;
+                    alert("Cool! La personne a été créée avec id : " + id);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(XMLHttpRequest.responseJSON.ExceptionMessage);
+                }
+            });
+        });
+
+        function stringToDate(string) {
+            var pattern = /(\d{2})\/(\d{2})\/(\d{4})/;
+            return new Date(string.replace(pattern, '$3-$2-$1'));
+        }
+    </script>
+</body>
+</html>

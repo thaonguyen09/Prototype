@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Liste Personne</title>
+    <link rel="icon" href="/favicon.jpg">
+</head>
+<body>
+    <div>
+        <h2>All Personnes</h2>
+        <button id="addButton" >Add</button>
+        <table border="1" id="personnes" >
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Date de naissance</th>
+            </tr>
+        </table>
+    </div>
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+
+    <script>
+        var uri = '/api/personne';
+
+        $("#addButton").click(function () {
+            window.open("PersonneAdd.html");
+        });
+
+        $(document).ready(function () {
+          // Send an AJAX request
+          $.getJSON(uri)
+              .done(function (data) {
+                // On success, 'data' contains a list of products.
+                $.each(data, function (key, item) {
+                    // Add a list item for the product.
+                    $('<tr>', { html: formatItem(item) }).appendTo($('#personnes'));
+                });
+              });
+        });
+
+        function formatItem(item) {
+            var formattedDate = new Date(item.Birthday);
+            var stringDate = getFormattedDate(formattedDate);
+
+            return '<td>' + item.FirstName + '</td><td>' + item.LastName + '</td><td>' + stringDate + '</td>';
+        }
+
+        function getFormattedDate(date) {
+            var year = date.getFullYear();
+            var month = (1 + date.getMonth()).toString();
+            month = month.length > 1 ? month : '0' + month;
+            var day = date.getDate().toString();
+            day = day.length > 1 ? day : '0' + day;
+            return day + '/' + month + '/' + year;
+        }
+    </script>
+</body>
+</html>
