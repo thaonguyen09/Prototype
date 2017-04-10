@@ -14,6 +14,11 @@ namespace Prototype.Data
         /// </summary>
         private static List<Personne> Personnes;
 
+        /// <summary>
+        /// Retourner la liste des personnes (en statique).
+        /// Si la liste n'existe pas encore, en créer une.
+        /// </summary>
+        /// <returns></returns>
         public List<Personne> GetListPersonne()
         {
             if(Personnes == null)
