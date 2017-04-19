@@ -1,0 +1,479 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Edmx Version="3.0" xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <Runtime>
+    <ConceptualModels>
+      <Schema Namespace="MasterMission.Data" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Agence" customannotation:ClrType="MasterMission.Models.Agence, MasterMission.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Libelle" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FeuilleDeFrais" customannotation:ClrType="MasterMission.Models.FeuilleDeFrais, MasterMission.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateDebut" Type="DateTime" Nullable="false" />
+          <Property Name="DateFin" Type="DateTime" Nullable="false" />
+          <Property Name="SalarieId" Type="Int32" Nullable="false" />
+          <Property Name="ResponsableId" Type="Int32" Nullable="false" />
+          <Property Name="KilometrageMois" Type="Double" Nullable="false" />
+          <Property Name="CompteurDebutMois" Type="Double" Nullable="false" />
+          <Property Name="DateDePaiement" Type="DateTime" Nullable="false" />
+          <Property Name="ModePaiement" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReferenceDePiece" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AgenceId" Type="Int32" Nullable="false" />
+          <Property Name="VehiculeId" Type="Int32" Nullable="false" />
+          <Property Name="VehiculePersonnel" Type="Boolean" Nullable="false" />
+          <Property Name="VehiculeSociete" Type="Boolean" Nullable="false" />
+          <Property Name="EtatValide" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Agence" Relationship="Self.FeuilleDeFrais_Agence" FromRole="FeuilleDeFrais_Agence_Source" ToRole="FeuilleDeFrais_Agence_Target" />
+          <NavigationProperty Name="Lignes" Relationship="Self.LigneDeplacement_FeuilleDeFrais" FromRole="LigneDeplacement_FeuilleDeFrais_Target" ToRole="LigneDeplacement_FeuilleDeFrais_Source" />
+          <NavigationProperty Name="Responsable" Relationship="Self.FeuilleDeFrais_Responsable" FromRole="FeuilleDeFrais_Responsable_Source" ToRole="FeuilleDeFrais_Responsable_Target" />
+          <NavigationProperty Name="Salarie" Relationship="Self.FeuilleDeFrais_Salarie" FromRole="FeuilleDeFrais_Salarie_Source" ToRole="FeuilleDeFrais_Salarie_Target" />
+          <NavigationProperty Name="Vehicule" Relationship="Self.FeuilleDeFrais_Vehicule" FromRole="FeuilleDeFrais_Vehicule_Source" ToRole="FeuilleDeFrais_Vehicule_Target" />
+        </EntityType>
+        <EntityType Name="LigneDeplacement" customannotation:ClrType="MasterMission.Models.LigneDeplacement, MasterMission.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FeuilleDeFraisId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="LibelleDeDeplacement" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NbKmVehiculeSoc" Type="Double" Nullable="false" />
+          <Property Name="NbKmVehiculePerso" Type="Double" Nullable="false" />
+          <Property Name="MontantIndemniteVehiPerso" Type="Double" Nullable="false" />
+          <Property Name="MontantHtEntretienVehSoc" Type="Double" Nullable="false" />
+          <Property Name="MontantHtHotelResto" Type="Double" Nullable="false" />
+          <Property Name="MontantCarbParkPeage" Type="Double" Nullable="false" />
+          <Property Name="MontantHtAutresFrais" Type="Double" Nullable="false" />
+          <Property Name="MontantTvaDeductible" Type="Double" Nullable="false" />
+          <NavigationProperty Name="FeuilleDeFrais" Relationship="Self.LigneDeplacement_FeuilleDeFrais" FromRole="LigneDeplacement_FeuilleDeFrais_Source" ToRole="LigneDeplacement_FeuilleDeFrais_Target" />
+        </EntityType>
+        <EntityType Name="Salarie" customannotation:ClrType="MasterMission.Models.Salarie, MasterMission.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Identifiant" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MotDePasse" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Matricule" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Prenom" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateEntree" Type="DateTime" Nullable="false" />
+          <Property Name="DateSortie" Type="DateTime" Nullable="false" />
+          <Property Name="VehiculePersonnel" Type="Int32" Nullable="false" />
+          <Property Name="Profil" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AgenceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Agence" Relationship="Self.Salarie_Agence" FromRole="Salarie_Agence_Source" ToRole="Salarie_Agence_Target" />
+        </EntityType>
+        <EntityType Name="Vehicule" customannotation:ClrType="MasterMission.Models.Vehicule, MasterMission.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlaqueMineralogique" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PuissanceFiscale" Type="Double" Nullable="false" />
+          <Property Name="Kilometrage" Type="Double" Nullable="false" />
+        </EntityType>
+        <Association Name="FeuilleDeFrais_Agence">
+          <End Role="FeuilleDeFrais_Agence_Source" Type="Self.FeuilleDeFrais" Multiplicity="*" />
+          <End Role="FeuilleDeFrais_Agence_Target" Type="Self.Agence" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="FeuilleDeFrais_Agence_Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FeuilleDeFrais_Agence_Source">
+              <PropertyRef Name="AgenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LigneDeplacement_FeuilleDeFrais">
+          <End Role="LigneDeplacement_FeuilleDeFrais_Source" Type="Self.LigneDeplacement" Multiplicity="*" />
+          <End Role="LigneDeplacement_FeuilleDeFrais_Target" Type="Self.FeuilleDeFrais" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="LigneDeplacement_FeuilleDeFrais_Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LigneDeplacement_FeuilleDeFrais_Source">
+              <PropertyRef Name="FeuilleDeFraisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Salarie_Agence">
+          <End Role="Salarie_Agence_Source" Type="Self.Salarie" Multiplicity="*" />
+          <End Role="Salarie_Agence_Target" Type="Self.Agence" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="Salarie_Agence_Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Salarie_Agence_Source">
+              <PropertyRef Name="AgenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FeuilleDeFrais_Responsable">
+          <End Role="FeuilleDeFrais_Responsable_Source" Type="Self.FeuilleDeFrais" Multiplicity="*" />
+          <End Role="FeuilleDeFrais_Responsable_Target" Type="Self.Salarie" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="FeuilleDeFrais_Responsable_Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FeuilleDeFrais_Responsable_Source">
+              <PropertyRef Name="ResponsableId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FeuilleDeFrais_Salarie">
+          <End Role="FeuilleDeFrais_Salarie_Source" Type="Self.FeuilleDeFrais" Multiplicity="*" />
+          <End Role="FeuilleDeFrais_Salarie_Target" Type="Self.Salarie" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="FeuilleDeFrais_Salarie_Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FeuilleDeFrais_Salarie_Source">
+              <PropertyRef Name="SalarieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FeuilleDeFrais_Vehicule">
+          <End Role="FeuilleDeFrais_Vehicule_Source" Type="Self.FeuilleDeFrais" Multiplicity="*" />
+          <End Role="FeuilleDeFrais_Vehicule_Target" Type="Self.Vehicule" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="FeuilleDeFrais_Vehicule_Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FeuilleDeFrais_Vehicule_Source">
+              <PropertyRef Name="VehiculeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MasterDbContext" customannotation:UseClrTypes="true">
+          <EntitySet Name="Agences" EntityType="Self.Agence" />
+          <EntitySet Name="FeuillesDeFrais" EntityType="Self.FeuilleDeFrais" />
+          <EntitySet Name="LignesDeDepalacement" EntityType="Self.LigneDeplacement" />
+          <EntitySet Name="Salaries" EntityType="Self.Salarie" />
+          <EntitySet Name="Vehicules" EntityType="Self.Vehicule" />
+          <AssociationSet Name="FeuilleDeFrais_Agence" Association="Self.FeuilleDeFrais_Agence">
+            <End Role="FeuilleDeFrais_Agence_Source" EntitySet="FeuillesDeFrais" />
+            <End Role="FeuilleDeFrais_Agence_Target" EntitySet="Agences" />
+          </AssociationSet>
+          <AssociationSet Name="LigneDeplacement_FeuilleDeFrais" Association="Self.LigneDeplacement_FeuilleDeFrais">
+            <End Role="LigneDeplacement_FeuilleDeFrais_Source" EntitySet="LignesDeDepalacement" />
+            <End Role="LigneDeplacement_FeuilleDeFrais_Target" EntitySet="FeuillesDeFrais" />
+          </AssociationSet>
+          <AssociationSet Name="Salarie_Agence" Association="Self.Salarie_Agence">
+            <End Role="Salarie_Agence_Source" EntitySet="Salaries" />
+            <End Role="Salarie_Agence_Target" EntitySet="Agences" />
+          </AssociationSet>
+          <AssociationSet Name="FeuilleDeFrais_Responsable" Association="Self.FeuilleDeFrais_Responsable">
+            <End Role="FeuilleDeFrais_Responsable_Source" EntitySet="FeuillesDeFrais" />
+            <End Role="FeuilleDeFrais_Responsable_Target" EntitySet="Salaries" />
+          </AssociationSet>
+          <AssociationSet Name="FeuilleDeFrais_Salarie" Association="Self.FeuilleDeFrais_Salarie">
+            <End Role="FeuilleDeFrais_Salarie_Source" EntitySet="FeuillesDeFrais" />
+            <End Role="FeuilleDeFrais_Salarie_Target" EntitySet="Salaries" />
+          </AssociationSet>
+          <AssociationSet Name="FeuilleDeFrais_Vehicule" Association="Self.FeuilleDeFrais_Vehicule">
+            <End Role="FeuilleDeFrais_Vehicule_Source" EntitySet="FeuillesDeFrais" />
+            <End Role="FeuilleDeFrais_Vehicule_Target" EntitySet="Vehicules" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </ConceptualModels>
+    <Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CodeFirstDatabase" CdmEntityContainer="MasterDbContext">
+          <EntitySetMapping Name="Agences">
+            <EntityTypeMapping TypeName="MasterMission.Data.Agence">
+              <MappingFragment StoreEntitySet="Agence">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FeuillesDeFrais">
+            <EntityTypeMapping TypeName="MasterMission.Data.FeuilleDeFrais">
+              <MappingFragment StoreEntitySet="FeuilleDeFrais">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DateDebut" ColumnName="DateDebut" />
+                <ScalarProperty Name="DateFin" ColumnName="DateFin" />
+                <ScalarProperty Name="SalarieId" ColumnName="SalarieId" />
+                <ScalarProperty Name="ResponsableId" ColumnName="ResponsableId" />
+                <ScalarProperty Name="KilometrageMois" ColumnName="KilometrageMois" />
+                <ScalarProperty Name="CompteurDebutMois" ColumnName="CompteurDebutMois" />
+                <ScalarProperty Name="DateDePaiement" ColumnName="DateDePaiement" />
+                <ScalarProperty Name="ModePaiement" ColumnName="ModePaiement" />
+                <ScalarProperty Name="ReferenceDePiece" ColumnName="ReferenceDePiece" />
+                <ScalarProperty Name="AgenceId" ColumnName="AgenceId" />
+                <ScalarProperty Name="VehiculeId" ColumnName="VehiculeId" />
+                <ScalarProperty Name="VehiculePersonnel" ColumnName="VehiculePersonnel" />
+                <ScalarProperty Name="VehiculeSociete" ColumnName="VehiculeSociete" />
+                <ScalarProperty Name="EtatValide" ColumnName="EtatValide" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LignesDeDepalacement">
+            <EntityTypeMapping TypeName="MasterMission.Data.LigneDeplacement">
+              <MappingFragment StoreEntitySet="LigneDeplacement">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FeuilleDeFraisId" ColumnName="FeuilleDeFraisId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="LibelleDeDeplacement" ColumnName="LibelleDeDeplacement" />
+                <ScalarProperty Name="NbKmVehiculeSoc" ColumnName="NbKmVehiculeSoc" />
+                <ScalarProperty Name="NbKmVehiculePerso" ColumnName="NbKmVehiculePerso" />
+                <ScalarProperty Name="MontantIndemniteVehiPerso" ColumnName="MontantIndemniteVehiPerso" />
+                <ScalarProperty Name="MontantHtEntretienVehSoc" ColumnName="MontantHtEntretienVehSoc" />
+                <ScalarProperty Name="MontantHtHotelResto" ColumnName="MontantHtHotelResto" />
+                <ScalarProperty Name="MontantCarbParkPeage" ColumnName="MontantCarbParkPeage" />
+                <ScalarProperty Name="MontantHtAutresFrais" ColumnName="MontantHtAutresFrais" />
+                <ScalarProperty Name="MontantTvaDeductible" ColumnName="MontantTvaDeductible" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Salaries">
+            <EntityTypeMapping TypeName="MasterMission.Data.Salarie">
+              <MappingFragment StoreEntitySet="Salarie">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Identifiant" ColumnName="Identifiant" />
+                <ScalarProperty Name="MotDePasse" ColumnName="MotDePasse" />
+                <ScalarProperty Name="Matricule" ColumnName="Matricule" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="DateEntree" ColumnName="DateEntree" />
+                <ScalarProperty Name="DateSortie" ColumnName="DateSortie" />
+                <ScalarProperty Name="VehiculePersonnel" ColumnName="VehiculePersonnel" />
+                <ScalarProperty Name="Profil" ColumnName="Profil" />
+                <ScalarProperty Name="AgenceId" ColumnName="AgenceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vehicules">
+            <EntityTypeMapping TypeName="MasterMission.Data.Vehicule">
+              <MappingFragment StoreEntitySet="Vehicule">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PlaqueMineralogique" ColumnName="PlaqueMineralogique" />
+                <ScalarProperty Name="PuissanceFiscale" ColumnName="PuissanceFiscale" />
+                <ScalarProperty Name="Kilometrage" ColumnName="Kilometrage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </Mappings>
+    <StorageModels>
+      <Schema Namespace="CodeFirstDatabaseSchema" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Agence">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Libelle" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FeuilleDeFrais">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateDebut" Type="datetime" Nullable="false" />
+          <Property Name="DateFin" Type="datetime" Nullable="false" />
+          <Property Name="SalarieId" Type="int" customannotation:Index="{ Name: IX_SalarieId, Order: 0 }" Nullable="false" />
+          <Property Name="ResponsableId" Type="int" customannotation:Index="{ Name: IX_ResponsableId, Order: 0 }" Nullable="false" />
+          <Property Name="KilometrageMois" Type="float" Nullable="false" />
+          <Property Name="CompteurDebutMois" Type="float" Nullable="false" />
+          <Property Name="DateDePaiement" Type="datetime" Nullable="false" />
+          <Property Name="ModePaiement" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="ReferenceDePiece" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="AgenceId" Type="int" customannotation:Index="{ Name: IX_AgenceId, Order: 0 }" Nullable="false" />
+          <Property Name="VehiculeId" Type="int" customannotation:Index="{ Name: IX_VehiculeId, Order: 0 }" Nullable="false" />
+          <Property Name="VehiculePersonnel" Type="bit" Nullable="false" />
+          <Property Name="VehiculeSociete" Type="bit" Nullable="false" />
+          <Property Name="EtatValide" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LigneDeplacement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FeuilleDeFraisId" Type="int" customannotation:Index="{ Name: IX_FeuilleDeFraisId, Order: 0 }" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="LibelleDeDeplacement" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="NbKmVehiculeSoc" Type="float" Nullable="false" />
+          <Property Name="NbKmVehiculePerso" Type="float" Nullable="false" />
+          <Property Name="MontantIndemniteVehiPerso" Type="float" Nullable="false" />
+          <Property Name="MontantHtEntretienVehSoc" Type="float" Nullable="false" />
+          <Property Name="MontantHtHotelResto" Type="float" Nullable="false" />
+          <Property Name="MontantCarbParkPeage" Type="float" Nullable="false" />
+          <Property Name="MontantHtAutresFrais" Type="float" Nullable="false" />
+          <Property Name="MontantTvaDeductible" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Salarie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Identifiant" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="MotDePasse" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Matricule" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Prenom" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="DateEntree" Type="date" Nullable="false" />
+          <Property Name="DateSortie" Type="date" Nullable="false" />
+          <Property Name="VehiculePersonnel" Type="int" Nullable="false" />
+          <Property Name="Profil" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="AgenceId" Type="int" customannotation:Index="{ Name: IX_AgenceId, Order: 0 }" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vehicule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlaqueMineralogique" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="PuissanceFiscale" Type="float" Nullable="false" />
+          <Property Name="Kilometrage" Type="float" Nullable="false" />
+        </EntityType>
+        <Association Name="FeuilleDeFrais_Agence">
+          <End Role="Agence" Type="Self.Agence" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FeuilleDeFrais" Type="Self.FeuilleDeFrais" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agence">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FeuilleDeFrais">
+              <PropertyRef Name="AgenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LigneDeplacement_FeuilleDeFrais">
+          <End Role="FeuilleDeFrais" Type="Self.FeuilleDeFrais" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LigneDeplacement" Type="Self.LigneDeplacement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FeuilleDeFrais">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LigneDeplacement">
+              <PropertyRef Name="FeuilleDeFraisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Salarie_Agence">
+          <End Role="Agence" Type="Self.Agence" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Salarie" Type="Self.Salarie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agence">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Salarie">
+              <PropertyRef Name="AgenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FeuilleDeFrais_Responsable">
+          <End Role="Salarie" Type="Self.Salarie" Multiplicity="1" />
+          <End Role="FeuilleDeFrais" Type="Self.FeuilleDeFrais" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salarie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FeuilleDeFrais">
+              <PropertyRef Name="ResponsableId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FeuilleDeFrais_Salarie">
+          <End Role="Salarie" Type="Self.Salarie" Multiplicity="1" />
+          <End Role="FeuilleDeFrais" Type="Self.FeuilleDeFrais" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salarie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FeuilleDeFrais">
+              <PropertyRef Name="SalarieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FeuilleDeFrais_Vehicule">
+          <End Role="Vehicule" Type="Self.Vehicule" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FeuilleDeFrais" Type="Self.FeuilleDeFrais" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicule">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FeuilleDeFrais">
+              <PropertyRef Name="VehiculeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CodeFirstDatabase">
+          <EntitySet Name="Agence" EntityType="Self.Agence" Schema="dbo" Table="Agences" />
+          <EntitySet Name="FeuilleDeFrais" EntityType="Self.FeuilleDeFrais" Schema="dbo" Table="FeuilleDeFrais" />
+          <EntitySet Name="LigneDeplacement" EntityType="Self.LigneDeplacement" Schema="dbo" Table="LigneDeplacements" />
+          <EntitySet Name="Salarie" EntityType="Self.Salarie" Schema="dbo" Table="Salaries" />
+          <EntitySet Name="Vehicule" EntityType="Self.Vehicule" Schema="dbo" Table="Vehicules" />
+          <AssociationSet Name="FeuilleDeFrais_Agence" Association="Self.FeuilleDeFrais_Agence">
+            <End Role="Agence" EntitySet="Agence" />
+            <End Role="FeuilleDeFrais" EntitySet="FeuilleDeFrais" />
+          </AssociationSet>
+          <AssociationSet Name="LigneDeplacement_FeuilleDeFrais" Association="Self.LigneDeplacement_FeuilleDeFrais">
+            <End Role="FeuilleDeFrais" EntitySet="FeuilleDeFrais" />
+            <End Role="LigneDeplacement" EntitySet="LigneDeplacement" />
+          </AssociationSet>
+          <AssociationSet Name="Salarie_Agence" Association="Self.Salarie_Agence">
+            <End Role="Agence" EntitySet="Agence" />
+            <End Role="Salarie" EntitySet="Salarie" />
+          </AssociationSet>
+          <AssociationSet Name="FeuilleDeFrais_Responsable" Association="Self.FeuilleDeFrais_Responsable">
+            <End Role="Salarie" EntitySet="Salarie" />
+            <End Role="FeuilleDeFrais" EntitySet="FeuilleDeFrais" />
+          </AssociationSet>
+          <AssociationSet Name="FeuilleDeFrais_Salarie" Association="Self.FeuilleDeFrais_Salarie">
+            <End Role="Salarie" EntitySet="Salarie" />
+            <End Role="FeuilleDeFrais" EntitySet="FeuilleDeFrais" />
+          </AssociationSet>
+          <AssociationSet Name="FeuilleDeFrais_Vehicule" Association="Self.FeuilleDeFrais_Vehicule">
+            <End Role="Vehicule" EntitySet="Vehicule" />
+            <End Role="FeuilleDeFrais" EntitySet="FeuilleDeFrais" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </StorageModels>
+  </Runtime>
+  <Designer>
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="ProcessDependentTemplatesOnSave" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <Diagrams />
+  </Designer>
+</Edmx>

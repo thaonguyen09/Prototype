@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Liste Vehicule</title>
+    <link rel="icon" href="/favicon.jpg">
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+</head>
+<body>
+    <div>
+        <h2>All Vehicules</h2>
+        <table border="1" id="vehicules" >
+            <tr>
+                <th>PlaqueMineralogique</th>
+                <th>PuissanceFiscale</th>
+                <th>Kilometrage</th>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        var uri = '/api/vehicule';
+
+        $(document).ready(function () {
+          // Send an AJAX request
+          $.getJSON(uri)
+              .done(function (data) {
+                // On success, 'data' contains a list of products.
+                $.each(data, function (key, item) {
+                    // Add a list item for the product.
+                    $('<tr>', { html: formatItem(item) }).appendTo($('#vehicules'));
+                });
+              });
+        });
+        
+        function formatItem(item) {
+            return '<td>' + item.PlaqueMineralogique + '</td><td>' + item.PuissanceFiscale + '</td><td>' + item.Kilometrage + '</td>';
+        }
+    </script>
+</body>
+</html>
