@@ -7,7 +7,7 @@
 <body>
     <div>
         <h2>All Personnes</h2>
-        <button id="addButton" >Add</button>
+        <button id="addPersonneButton" >Add</button>
         <table border="1" id="personnes" >
             <tr>
                 <th>Nom</th>
@@ -23,8 +23,8 @@
     <script>
         var uri = '/api/personne';
 
-        $("#addButton").click(function () {
-            window.open("PersonneAdd.html");
+        $("#addPersonneButton").click(function () {
+            window.open("PersonneEdit.html");
         });
 
         $(document).ready(function () {

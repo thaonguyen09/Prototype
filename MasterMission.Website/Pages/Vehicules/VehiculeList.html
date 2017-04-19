@@ -10,6 +10,7 @@
 <body>
     <div>
         <h2>All Vehicules</h2>
+        <button id="addVehiculeButton">Add</button>
         <table border="1" id="vehicules" >
             <tr>
                 <th>PlaqueMineralogique</th>
@@ -32,6 +33,10 @@
                     $('<tr>', { html: formatItem(item) }).appendTo($('#vehicules'));
                 });
               });
+        });
+
+        $("#addVehiculeButton").click(function () {
+            window.open("VehiculeEdit.html");
         });
         
         function formatItem(item) {

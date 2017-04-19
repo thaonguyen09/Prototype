@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ajouter Vehicule</title>
+    <link rel="icon" href="/favicon.jpg">
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+</head>
+<body>
+    <div>
+        <h2>Personne</h2>
+        <table>
+            <tr>
+                <td>PlaqueMineralogique</td>
+                <td><input type="text" id="PlaqueMineralogique" maxlength="256" /></td>
+            </tr>
+            <tr>
+                <td>PuissanceFiscale</td>
+                <td><input type="number" id="PuissanceFiscale" /></td>
+            </tr>
+            <tr>
+                <td>Kilometrage</td>
+                <td><input type="number" id="Kilometrage" /></td>
+            </tr>
+        </table>
+        <button id="saveButton">Save</button>
+    </div>
+
+    <script>
+        var uri = '/api/vehicule';
+
+        $("#saveButton").click(function () {
+            var vehicule = {
+                PlaqueMineralogique: document.getElementById('PlaqueMineralogique').value,
+                PuissanceFiscale: document.getElementById('PuissanceFiscale').value,
+                Kilometrage: document.getElementById('Kilometrage').value
+            };
+
+            $.ajax({
+                type: "POST",
+                url: uri,
+                data: vehicule,
+                success: function (result) {
+                    var id = result.Id;
+                    alert("Cool! Le vehicule a été créée avec id : " + id);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(XMLHttpRequest.responseJSON.ExceptionMessage);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

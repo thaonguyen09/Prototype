@@ -261,8 +261,9 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Pages\Vehicules\VehiculeEdit.html" />
     <Content Include="Pages\Vehicules\VehiculeList.html" />
-    <Content Include="Pages\Personnes\PersonneAdd.html" />
+    <Content Include="Pages\Personnes\PersonneEdit.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
