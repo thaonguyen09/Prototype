@@ -17,9 +17,10 @@ namespace MasterMission.Controllers
         // GET api/personne
         public IEnumerable<Vehicule> Get()
         {
-            var test = (new MasterDbContext()).Vehicules;
-            var test2 = test.ToList();
-            return test2;
+            using (var context = new MasterDbContext())
+            {
+                return context.Vehicules.ToList();
+            }
         }
 
         // GET api/personne/5
@@ -39,8 +40,7 @@ namespace MasterMission.Controllers
         {
             using (var context = new MasterDbContext())
             {
-                var list = context.Vehicules;
-                list.Add(value);
+                context.Vehicules.Add(value);
                 context.SaveChanges();
                 return value;
             }
@@ -49,24 +49,30 @@ namespace MasterMission.Controllers
         // PUT api/personne/5
         public void Put(int id, [FromBody] Vehicule value)
         {
-            var list = (new MasterDbContext()).Vehicules;
-            var item = list.FirstOrDefault(t => t.Id == id);
-            if (item != null)
+            using (var context = new MasterDbContext())
             {
-                item.PlaqueMineralogique = value.PlaqueMineralogique;
-                item.PuissanceFiscale = value.PuissanceFiscale;
-                item.Kilometrage = value.Kilometrage;
+                var list = context.Vehicules;
+                var item = list.FirstOrDefault(t => t.Id == id);
+                if (item != null)
+                {
+                    item.PlaqueMineralogique = value.PlaqueMineralogique;
+                    item.PuissanceFiscale = value.PuissanceFiscale;
+                    item.Kilometrage = value.Kilometrage;
+                }
             }
         }
 
         // DELETE api/personne/5
         public void Delete(int id)
         {
-            var list = (new MasterDbContext()).Vehicules;
-            var item = list.FirstOrDefault(t => t.Id == id);
-            if(item != null)
+            using (var context = new MasterDbContext())
             {
-                list.Remove(item);
+                var list = context.Vehicules;
+                var item = list.FirstOrDefault(t => t.Id == id);
+                if (item != null)
+                {
+                    list.Remove(item);
+                }
             }
         }
     }
